@@ -9,6 +9,7 @@ import com.brq.aviaoms.repository.AviaoRepository;
 import com.brq.aviaoms.service.AviaoService;
 import com.brq.aviaoms.service.AviaoValidationService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AviaoServiceImpl implements AviaoService {
 
     private final AviaoRepository aviaoRepository;
@@ -35,6 +37,7 @@ public class AviaoServiceImpl implements AviaoService {
     @Override
     @Transactional(readOnly = true)
     public List<AviaoResponse> buscarTodosAvioes() {
+        log.info("Service buscarTodosAvioes");
         return aviaoRepository.findAll().stream().map(aviao -> aviao.createAviaoResponseFromAviao()).collect(Collectors.toList());
     }
 
@@ -46,6 +49,7 @@ public class AviaoServiceImpl implements AviaoService {
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<AviaoResponse> buscarAviaoPorId(UUID id) {
+        log.info("Service buscarAviaoPorId");
         Optional<Aviao> optional = aviaoRepository.findById(id);
         return optional.isPresent() ? ResponseEntity.status(HttpStatus.OK).body(optional.get().createAviaoResponseFromAviao())
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -69,7 +73,7 @@ public class AviaoServiceImpl implements AviaoService {
     public List<AviaoResponse> buscarAviaoPorFiltro(String modelo, String fabricante, String empresa, String motor,
                                                     Integer qtdPassageiros, Integer qtdPortasSaida,
                                                     Double altitudeMaxima, Double velocidadeMaxima, Double capacidadeMaximaVoo) {
-
+        log.info("Service buscarAviaoPorFiltro");
         PredicateFilter predicateFilter = PredicateFilter.getPredicateFilter(modelo, fabricante, empresa, motor, qtdPassageiros, qtdPortasSaida, altitudeMaxima, velocidadeMaxima, capacidadeMaximaVoo);
         return StreamSupport.stream(aviaoRepository.findAll(predicateFilter.createPredicate(modelo, fabricante, empresa, motor, qtdPassageiros, qtdPortasSaida, altitudeMaxima, velocidadeMaxima, capacidadeMaximaVoo)).spliterator(), false)
                 .collect(Collectors.toList()).stream().map(aviao -> aviao.createAviaoResponseFromAviao()).collect(Collectors.toList());
@@ -85,7 +89,7 @@ public class AviaoServiceImpl implements AviaoService {
     @Override
     @Transactional
     public ResponseEntity<AviaoResponse> postAviao(AviaoRequest aviaoRequest, BindingResult bindingResult) {
-
+        log.info("Service postAviao");
         if(!aviaoValidationService.isAviaoValid(aviaoRequest, bindingResult)){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(AviaoResponse.createAviaoResponseValidation(HttpStatus.BAD_REQUEST.value(), bindingResult));
@@ -104,6 +108,7 @@ public class AviaoServiceImpl implements AviaoService {
      */
     @Override
     public ResponseEntity<AviaoResponse> putAviao(AviaoRequest aviaoRequest, BindingResult bindingResult, UUID id) {
+        log.info("Service putAviao");
         if(!aviaoValidationService.isAviaoValid(aviaoRequest, bindingResult)){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(AviaoResponse.createAviaoResponseValidation(HttpStatus.BAD_REQUEST.value(), bindingResult));
@@ -114,8 +119,14 @@ public class AviaoServiceImpl implements AviaoService {
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
+    /**
+     * Service para deletar avião
+     * @param id
+     * @return
+     */
     @Override
     public ResponseEntity<AviaoResponse> deleteAviao(UUID id) {
+        log.info("Service deleteAviao");
         aviaoRepository.findById(id).ifPresentOrElse(product -> aviaoRepository.delete(product), () -> {throw new NotFoundException();});
         return ResponseEntity.ok().body(null);
     }

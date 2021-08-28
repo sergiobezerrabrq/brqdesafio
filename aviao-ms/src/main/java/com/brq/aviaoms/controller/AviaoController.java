@@ -6,6 +6,7 @@ import com.brq.aviaoms.service.AviaoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @RequestMapping(value = "/avioes/v1")
 @RequiredArgsConstructor
 @Api(value = "Aviões")
+@Slf4j
 public class AviaoController {
 
     private final AviaoService aviaoService;
@@ -31,6 +33,7 @@ public class AviaoController {
     @GetMapping
     @ApiOperation(value = "All Aviões")
     public ResponseEntity<List<AviaoResponse>> buscarTodosAvioes(){
+        log.info("Endpoint GET buscarTodosAvioes()");
         return ResponseEntity.ok().body(aviaoService.buscarTodosAvioes());
     }
 
@@ -42,6 +45,7 @@ public class AviaoController {
    @GetMapping(value = "/{id}")
    @ApiOperation(value = "Aviões by Id")
    public ResponseEntity<AviaoResponse> buscarAviaoPorId(@PathVariable @NotBlank UUID id){
+       log.info("Endpoint GET buscarAviaoPorId(...)");
         return aviaoService.buscarAviaoPorId(id);
    }
 
@@ -69,7 +73,7 @@ public class AviaoController {
                                                                    @RequestParam (name = "altitude_maxima", required = false) Double altitudeMaxima,
                                                                    @RequestParam (name = "velocidade_maxima", required = false) Double velocidadeMaxima,
                                                                    @RequestParam (name = "capacidade_maxima_voo", required = false) Double capacidadeMaximaVoo){
-
+       log.info("Endpoint GET buscarAviaoPorFiltro(...)");
        return ResponseEntity.ok().body(aviaoService.buscarAviaoPorFiltro(modelo, fabricante, empresa, motor, qtdPassageiros, qtdPortasSaida, altitudeMaxima, velocidadeMaxima, capacidadeMaximaVoo));
     }
 
@@ -83,6 +87,7 @@ public class AviaoController {
     @ApiOperation(value = "Create Aviões")
     public ResponseEntity<AviaoResponse> postAviao(@RequestBody @Valid AviaoRequest aviaoRequest,
                                                                       BindingResult bindingResult){
+       log.info("Endpoint POST postAviao(...)");
        return aviaoService.postAviao(aviaoRequest, bindingResult);
     }
 
@@ -98,7 +103,7 @@ public class AviaoController {
     public ResponseEntity<AviaoResponse> putAviao(@PathVariable @NotBlank UUID id,
                                                   @RequestBody @Valid AviaoRequest aviaoRequest,
                                                   BindingResult bindingResult){
-
+        log.info("Endpoint PUT putAviao(...)");
         return aviaoService.putAviao(aviaoRequest, bindingResult, id);
     }
 
@@ -110,6 +115,7 @@ public class AviaoController {
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Delete Aviões")
     public ResponseEntity<AviaoResponse> deleteAviao(@PathVariable @NotBlank UUID id){
+        log.info("Endpoint DELETE deleteAviao(...)");
         return aviaoService.deleteAviao(id);
     }
 }
