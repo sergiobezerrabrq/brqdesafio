@@ -11,4 +11,6 @@ public interface AviaoService {
     List<AviaoResponse> buscarTodosAvioes();
 
     ResponseEntity<AviaoResponse> buscarAviaoPorId(UUID id);
+
+    List<AviaoResponse> buscarAviaoPorFiltro(String modelo, String fabricante, String empresa, String motor, Integer qtdPassageiros, Integer qtdPortasSaida, Double altitudeMaxima, Double velocidadeMaxima, Double capacidadeMaximaVoo);
 }
