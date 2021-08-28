@@ -1,0 +1,2 @@
+INSERT INTO aviao (id, modelo, fabricante, empresa, motor, qtd_Passageiros, qtd_Portas_Saida, altitude_Maxima, velocidade_Maxima, capacidade_Maxima_Voo) VALUES (RANDOM_UUID(), 'A320', 'Airbus', 'AirFrance', 'XTZ320', 165, 6, 40000, 825, 16);
+INSERT INTO aviao (id, modelo, fabricante, empresa, motor, qtd_Passageiros, qtd_Portas_Saida, altitude_Maxima, velocidade_Maxima, capacidade_Maxima_Voo) VALUES (RANDOM_UUID(), '777-300', 'Boeing', 'Gol', 'W5PLK', 185, 6, 45000, 840, 20);
