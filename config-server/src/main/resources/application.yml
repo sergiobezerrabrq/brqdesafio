@@ -1,0 +1,16 @@
+# Atenção. O username e password estão desta forma apenas para fins didáticos e de acesso ao desafio.
+# Do contrário seria uma variável de ambiente.
+
+server:
+  port: 9997
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/sergiobezerrabrq/brqdesafioconfig.git
+          username: sergiobezerrabrq@gmail.com
+          password: Brq21@#$
