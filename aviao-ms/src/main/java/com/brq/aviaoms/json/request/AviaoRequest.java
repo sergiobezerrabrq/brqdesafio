@@ -2,6 +2,7 @@ package com.brq.aviaoms.json.request;
 
 import com.brq.aviaoms.domain.Aviao;
 import com.brq.aviaoms.messages.Message;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,22 +38,27 @@ public class AviaoRequest {
 
     @NotNull(message = Message.QTD_PASSAGEIROS_NOT_ALLOWED)
     @PositiveOrZero(message = Message.QTD_PASSAGEIROS_NOT_FOUND)
+    @JsonProperty("qtd_passageiros")
     private Integer qtdPassageiros;
 
     @NotNull(message = Message.QTD_PORTAS_SAIDA_NOT_ALLOWED)
     @PositiveOrZero(message = Message.QTD_PORTAS_SAIDA_NOT_FOUND)
+    @JsonProperty("qtd_portas_saida")
     private Integer qtdPortasSaida;
 
     @NotNull(message = Message.ALTITUDE_NOT_ALLOWED)
     @PositiveOrZero(message = Message.ALTITUDE_NOT_FOUND)
+    @JsonProperty("altitude_maxima")
     private Double altitudeMaxima;
 
     @NotNull(message = Message.VELOCIDADE_MAXIMA_NOT_ALLOWED)
     @PositiveOrZero(message = Message.VELOCIDADE_MAXIMA_NOT_FOUND)
+    @JsonProperty("velocidade_maxima")
     private Double velocidadeMaxima;
 
     @NotNull(message = Message.CAPACIDADE_MAXIMA_VOO_NOT_ALLOWED)
     @PositiveOrZero(message = Message.CAPACIDADE_MAXIMA_VOO_NOT_FOUND)
+    @JsonProperty("capacidade_maxima_voo")
     private Double capacidadeMaximaVoo;
 
     /**

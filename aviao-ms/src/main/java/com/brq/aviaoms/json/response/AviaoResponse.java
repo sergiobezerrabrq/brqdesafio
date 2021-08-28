@@ -1,6 +1,7 @@
 package com.brq.aviaoms.json.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,18 +32,23 @@ public class AviaoResponse {
     private String motor;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("qtd_passageiros")
     private Integer qtdPassageiros;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("qtd_portas_saida")
     private Integer qtdPortasSaida;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("altitude_maxima")
     private Double altitudeMaxima;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("velocidade_maxima")
     private Double velocidadeMaxima;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("capacidade_maxima_voo")
     private Double capacidadeMaximaVoo;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
