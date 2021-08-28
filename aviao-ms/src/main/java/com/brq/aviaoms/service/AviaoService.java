@@ -19,4 +19,6 @@ public interface AviaoService {
     ResponseEntity<AviaoResponse> postAviao(AviaoRequest aviaoRequest, BindingResult bindingResult);
 
     ResponseEntity<AviaoResponse> putAviao(AviaoRequest aviaoRequest, BindingResult bindingResult, UUID id);
+
+    ResponseEntity<AviaoResponse> deleteAviao(UUID id);
 }

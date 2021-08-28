@@ -1,6 +1,7 @@
 package com.brq.aviaoms.service.Impl;
 
 import com.brq.aviaoms.domain.Aviao;
+import com.brq.aviaoms.exception.NotFoundException;
 import com.brq.aviaoms.filter.PredicateFilter;
 import com.brq.aviaoms.json.request.AviaoRequest;
 import com.brq.aviaoms.json.response.AviaoResponse;
@@ -111,5 +112,11 @@ public class AviaoServiceImpl implements AviaoService {
         Optional<Aviao> optional = aviaoRepository.findById(id);
         return optional.isPresent() ? ResponseEntity.status(HttpStatus.OK).body(aviaoRepository.save(optional.get().createAviaoFromAviaoRequest(aviaoRequest)).createAviaoResponseFromAviao())
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    @Override
+    public ResponseEntity<AviaoResponse> deleteAviao(UUID id) {
+        aviaoRepository.findById(id).ifPresentOrElse(product -> aviaoRepository.delete(product), () -> {throw new NotFoundException();});
+        return ResponseEntity.ok().body(null);
     }
 }

@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("ALL")
 @RestController
 @RequestMapping(value = "/avioes/v1")
 @RequiredArgsConstructor
@@ -91,5 +92,15 @@ public class AviaoController {
                                                   BindingResult bindingResult){
 
         return aviaoService.putAviao(aviaoRequest, bindingResult, id);
+    }
+
+    /**
+     * Endpoint responsável por deletar avião.
+     * @param id
+     * @return HttpStatus.Ok = 200
+     */
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<AviaoResponse> deleteAviao(@PathVariable @NotBlank UUID id){
+        return aviaoService.deleteAviao(id);
     }
 }
