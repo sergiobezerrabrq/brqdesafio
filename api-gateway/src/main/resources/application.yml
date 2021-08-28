@@ -1,0 +1,26 @@
+
+server:
+  port: 9999
+spring:
+  application:
+    name: api-gateway
+eureka:
+  client:
+    defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    prefer-ip-address: true
+zuul:
+  routes:
+    aviao-ms:
+      service-id: aviao-ms
+      path: /aviao-ms/**
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 20000
