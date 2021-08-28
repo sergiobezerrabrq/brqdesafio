@@ -20,7 +20,7 @@ import java.util.UUID;
 @Builder
 public class AviaoRequest {
 
-    @Pattern(regexp = "\\p{L}+", message = Message.MODELO_NOT_ALLOWED)
+    @Pattern(regexp = "^[a-zA-Z0-9-]+$", message = Message.MODELO_NOT_ALLOWED)
     @NotBlank(message = Message.MODELO_NOT_FOUND)
     private String modelo;
 
@@ -32,7 +32,7 @@ public class AviaoRequest {
     @NotBlank(message = Message.EMPRESA_NOT_FOUND)
     private String empresa;
 
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = Message.MODELO_NOT_ALLOWED)
+    @Pattern(regexp = "^[a-zA-Z0-9-]+$", message = Message.MODELO_NOT_ALLOWED)
     @NotBlank(message = Message.MODELO_NOT_FOUND)
     private String motor;
 
@@ -62,11 +62,11 @@ public class AviaoRequest {
     private Double capacidadeMaximaVoo;
 
     /**
-     * Método responsável por criar AviaoRequest
+     * Método responsável por criar Aviao
      * @return AviaoRequest
      */
-    public AviaoRequest createAviaoRequest(){
-        return AviaoRequest.builder()
+    public Aviao createAviao(){
+        return Aviao.builder()
                 .modelo(this.modelo)
                 .fabricante(this.fabricante)
                 .empresa(this.empresa)

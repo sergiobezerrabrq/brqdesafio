@@ -1,11 +1,14 @@
 package com.brq.aviaoms.controller;
 
+import com.brq.aviaoms.json.request.AviaoRequest;
 import com.brq.aviaoms.json.response.AviaoResponse;
 import com.brq.aviaoms.service.AviaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.UUID;
@@ -36,6 +39,19 @@ public class AviaoController {
         return aviaoService.buscarAviaoPorId(id);
    }
 
+    /**
+     * Endpoint responsável por buscar avião por filtro.
+     * @param modelo
+     * @param fabricante
+     * @param empresa
+     * @param motor
+     * @param qtdPassageiros
+     * @param qtdPortasSaida
+     * @param altitudeMaxima
+     * @param velocidadeMaxima
+     * @param capacidadeMaximaVoo
+     * @return Avião
+     */
    @GetMapping(value = "/search")
    public ResponseEntity<List<AviaoResponse>> buscarAviaoPorFiltro(@RequestParam (name = "modelo", required = false) String modelo,
                                                                    @RequestParam (name = "fabricante", required = false) String fabricante,
@@ -48,5 +64,17 @@ public class AviaoController {
                                                                    @RequestParam (name = "capacidade_maxima_voo", required = false) Double capacidadeMaximaVoo){
 
        return ResponseEntity.ok().body(aviaoService.buscarAviaoPorFiltro(modelo, fabricante, empresa, motor, qtdPassageiros, qtdPortasSaida, altitudeMaxima, velocidadeMaxima, capacidadeMaximaVoo));
+    }
+
+    /**
+     * Endpoint responsável por cadastrar avião.
+     * @param aviaoRequest
+     * @param bindingResult
+     * @return Avião
+     */
+    @PostMapping
+    public ResponseEntity<AviaoResponse> postAviao(@RequestBody @Valid AviaoRequest aviaoRequest,
+                                                                      BindingResult bindingResult){
+       return aviaoService.postAviao(aviaoRequest, bindingResult);
     }
 }

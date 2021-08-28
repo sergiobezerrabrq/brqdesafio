@@ -21,4 +21,6 @@ public class Message {
     public static final String ALTITUDE_NOT_ALLOWED = "Altitude não permitida.";
     public static final String VELOCIDADE_MAXIMA_NOT_ALLOWED = "Velocidade máxima não permitida.";
     public static final String CAPACIDADE_MAXIMA_VOO_NOT_ALLOWED = "Capacidade máxima de voo não permitida.";
+
+    public static final String DADOS_INVALIDOS = "Request inválida";
 }
