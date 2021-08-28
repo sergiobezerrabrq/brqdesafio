@@ -93,4 +93,23 @@ public class AviaoServiceImpl implements AviaoService {
         AviaoResponse aviaoResponse = aviaoRepository.save(aviaoRequest.createAviao()).createAviaoResponseFromAviao();
         return ResponseEntity.status(HttpStatus.CREATED).header("id", aviaoResponse.getId().toString()).body(aviaoResponse);
     }
+
+    /**
+     * Service para atualizar avião
+     * @param aviaoRequest
+     * @param bindingResult
+     * @param id
+     * @return Avião
+     */
+    @Override
+    public ResponseEntity<AviaoResponse> putAviao(AviaoRequest aviaoRequest, BindingResult bindingResult, UUID id) {
+        if(!aviaoValidationService.isAviaoValid(aviaoRequest, bindingResult)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(AviaoResponse.createAviaoResponseValidation(HttpStatus.BAD_REQUEST.value(), bindingResult));
+        }
+
+        Optional<Aviao> optional = aviaoRepository.findById(id);
+        return optional.isPresent() ? ResponseEntity.status(HttpStatus.OK).body(aviaoRepository.save(optional.get().createAviaoFromAviaoRequest(aviaoRequest)).createAviaoResponseFromAviao())
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
 }

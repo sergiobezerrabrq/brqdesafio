@@ -77,4 +77,19 @@ public class AviaoController {
                                                                       BindingResult bindingResult){
        return aviaoService.postAviao(aviaoRequest, bindingResult);
     }
+
+    /**
+     * Endpoint responsável por atualizar avião.
+     * @param id
+     * @param aviaoRequest
+     * @param bindingResult
+     * @return Avião
+     */
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<AviaoResponse> putAviao(@PathVariable @NotBlank UUID id,
+                                                  @RequestBody @Valid AviaoRequest aviaoRequest,
+                                                  BindingResult bindingResult){
+
+        return aviaoService.putAviao(aviaoRequest, bindingResult, id);
+    }
 }
