@@ -107,6 +107,7 @@ public class AviaoServiceImpl implements AviaoService {
      * @return Avião
      */
     @Override
+    @Transactional
     public ResponseEntity<AviaoResponse> putAviao(AviaoRequest aviaoRequest, BindingResult bindingResult, UUID id) {
         log.info("Service putAviao");
         if(!aviaoValidationService.isAviaoValid(aviaoRequest, bindingResult)){
@@ -125,6 +126,7 @@ public class AviaoServiceImpl implements AviaoService {
      * @return
      */
     @Override
+    @Transactional
     public ResponseEntity<AviaoResponse> deleteAviao(UUID id) {
         log.info("Service deleteAviao");
         aviaoRepository.findById(id).ifPresentOrElse(product -> aviaoRepository.delete(product), () -> {throw new NotFoundException();});
