@@ -1,0 +1,115 @@
+
+Swagger:
+http://localhost:9999/aviao-ms/swagger-ui.html
+
+-------------
+GitHub
+Existem dois repositórios. Um de configuração e outro com os projetos e arquivos adicionais.
+A branch dos projetos é a "aviao-ms"
+
+Para acessar o GitHub:
+Login: sergiobezerrabrq@gmail.com
+Password: Brq21@#$
+-------------
+
+Projeto consta:
+api-gateway
+eureka-Server
+config-Server
+aviao-ms
+H2 Database
+Docker
+
+-------------
+
+
+Configuração do Docker (Windows)
+
+0- Com o Docker instalado abra um Terminal PowerShell para o Banco de dados e cada Projeto abaixo.
+
+1- Crie uma Rede (net)
+Execute: 
+	docker network create aviao-net
+
+2- Baixar imagem H2/Database
+Execute: 
+	docker pull buildo/h2database
+
+3- Criar Container
+Execute: 
+	docker run --name my-h2 --network aviao-net -p 8082:8082 -d buildo/h2database
+
+4- Abra o Banco pelo Browser
+No Browser: 
+	http://localhost:8082/
+
+5- Mude o campo JDBC URL
+Insira: 
+	jdbc:h2:my-h2
+	
+7- Remova username e password do Banco caso exista e clique em Test Connection
+
+
+--->Projeto config-server	
+
+8- Gerar uma imagem do projeto (atenção na posição do ponto)
+Execute no terminal na pasta do projeto 
+
+    ./mvnw clean package -DskipTests
+	
+	docker build -t config-servidor:v1 .
+	
+9- Criar Container do Projeto
+Executar:
+	docker run -p 9997:9997 --name config-server --network aviao-net -e GITHUB_USER=sergiobezerrabrq@gmail.com -e GITHUB_PASS=Brq21@#$ config-servidor:v1 
+---	
+
+
+--->Projeto eureka-server	
+
+10- Gerar uma imagem do projeto (atenção na posição do ponto)
+Execute no terminal na pasta do projeto 
+
+	./mvnw clean package -DskipTests
+
+	docker build -t eureka-servidor:v1 .
+	
+11- Criar Container do Projeto
+Executar:
+	docker run -p 8761:8761 --name eureka-server --network aviao-net eureka-servidor:v1 
+---	
+
+
+--->Projeto aviao-ms	
+
+10- Gerar uma imagem do projeto (atenção na posição do ponto)
+Execute no terminal na pasta do projeto 
+	
+	./mvnw clean package -DskipTests
+
+	docker build -t aviao-image:v1 .
+	
+11- Criar Container do Projeto
+Executar:
+	docker run -p 9998:9998 --name aviao-microservice --network aviao-net -e GITHUB_USER=sergiobezerrabrq@gmail.com -e GITHUB_PASS=Brq21@#$ aviao-image:v1 
+---	
+
+
+--->Projeto api-gateway	
+
+13- Gerar uma imagem do projeto (atenção na posição do ponto)
+Execute no terminal na pasta do projeto 
+
+	./mvnw clean package -DskipTests
+
+	docker build -t api-gateway-image:v1 .
+	
+14- Criar Container do Projeto
+Executar:
+	docker run -p 9999:9999 --name api-gateway-server --network aviao-net api-gateway-image:v1 
+---	
+--------------------
+--------------------
+
+
+

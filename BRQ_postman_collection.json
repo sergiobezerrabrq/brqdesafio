@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "5560e593-4a5c-4f6f-9ba7-ddf9a85f192c",
+		"name": "BRQ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Aviões",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9999/aviao-ms/avioes/v1",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"aviao-ms",
+						"avioes",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Avião by Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9999/aviao-ms/avioes/v1/8dd3d55c-912e-4d30-8805-82564178d9c0",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"aviao-ms",
+						"avioes",
+						"v1",
+						"8dd3d55c-912e-4d30-8805-82564178d9c0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Avião by Filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9999/aviao-ms/avioes/v1/search?fabricante=Boeing&modelo=777-300",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"aviao-ms",
+						"avioes",
+						"v1",
+						"search"
+					],
+					"query": [
+						{
+							"key": "fabricante",
+							"value": "Boeing"
+						},
+						{
+							"key": "modelo",
+							"value": "777-300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Avião",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"modelo\": \"777-200\",\r\n    \"fabricante\": \"Boeing\",\r\n    \"empresa\": \"Azul\",\r\n    \"motor\": \"zxt\",\r\n    \"qtd_passageiros\": 165,\r\n    \"qtd_portas_saida\": 4,\r\n    \"altitude_maxima\": 35000.0,\r\n    \"velocidade_maxima\": 81000.00,\r\n    \"capacidade_maxima_voo\": 14.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9999/aviao-ms/avioes/v1",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"aviao-ms",
+						"avioes",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Avião",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"modelo\": \"777-200\",\r\n    \"fabricante\": \"Boeing\",\r\n    \"empresa\": \"TTTTT\",\r\n    \"motor\": \"zxt\",\r\n    \"qtd_passageiros\": 190,\r\n    \"qtd_portas_saida\": 6,\r\n    \"altitude_maxima\": 35000.0,\r\n    \"velocidade_maxima\": 81000.00,\r\n    \"capacidade_maxima_voo\": 14.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9999/aviao-ms/avioes/v1/e235f812-a755-4de3-a7e6-6f425baada87",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"aviao-ms",
+						"avioes",
+						"v1",
+						"e235f812-a755-4de3-a7e6-6f425baada87"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Avião",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9999/aviao-ms/avioes/v1/3413bd20-1ed5-4864-8bae-9f8b7a365fb5",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"aviao-ms",
+						"avioes",
+						"v1",
+						"3413bd20-1ed5-4864-8bae-9f8b7a365fb5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
