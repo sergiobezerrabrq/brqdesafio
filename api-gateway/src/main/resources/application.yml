@@ -6,7 +6,8 @@ spring:
     name: api-gateway
 eureka:
   client:
-    defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    service-url:
+      defaultZone: ${EUREKA_URI:http://eureka-server:8761/eureka}
   instance:
     prefer-ip-address: true
 zuul:
